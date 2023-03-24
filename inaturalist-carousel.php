@@ -27,8 +27,11 @@ function inat_carousel_enqueue_scripts() {
 
 add_action('wp_enqueue_scripts', 'inat_carousel_enqueue_scripts');
 
-function inat_carousel_fetch_data($project_id, $image_size) {
-    $api_url = "https://api.inaturalist.org/v1/observations?project_id={$project_id}&per_page=100";
+function inat_carousel_fetch_data($image_size, $api_params) {
+    $base_url = "https://api.inaturalist.org/v1/observations?";
+    $default_params = "per_page=100";
+
+    $api_url = $base_url . $default_params . '&' . $api_params;
     $response = wp_remote_get($api_url);
 
     if (is_wp_error($response)) {
@@ -44,14 +47,14 @@ function inat_carousel_fetch_data($project_id, $image_size) {
 function inat_carousel_shortcode($atts) {
     $atts = shortcode_atts(
         array(
-            'project_id' => '',
-            'image_size' => 'large', // Default image size
+            'image_size' => 'large',
+            'api_params' => '',
         ),
         $atts,
         'inat_carousel'
     );
 
-    $observations = inat_carousel_fetch_data($atts['project_id'], $atts['image_size']);
+    $observations = inat_carousel_fetch_data($atts['image_size'], $atts['api_params']);
 
     if (!$observations) {
         return '<p>Error fetching iNaturalist data.</p>';

@@ -17,31 +17,33 @@
     justify-content: center;
     text-align: center;
     color: #fff;
-  }
-  
-  /* Media queries for different screen sizes */
-  @media (max-width: 767px) {
+}
+
+/* Media queries for different screen sizes */
+@media (max-width: 767px) {
     .inat-carousel .slick-slide {
-      height: 70vh;
+        height: 70vh;
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .inat-carousel .slick-slide {
-      height: 100vh;
+        height: 100vh;
     }
-  }
-  
+}
 
 /* Overlay container */
 .inat-carousel .slick-slide .overlay {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: 25%;
+    right: 25%;
+    bottom: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Species name, Observation Date, and Observer username styling */
